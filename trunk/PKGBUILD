@@ -3,7 +3,7 @@
 pkgname=texlive-core
 pkgver=2022.63035
 _revnr=${pkgver#2022.}
-pkgrel=1
+pkgrel=2
 pkgdesc="TeX Live core distribution"
 license=('GPL')
 arch=(any)
@@ -172,6 +172,9 @@ package() {
  
    # more cleanup
    rm -rf "$pkgdir/usr/share/texmf-dist/scripts/context/stubs/mswin/"
+   
+   # fix tlmgr: FS#74404
+   sed -i 's/\$Master = "\$Master\/..\/..";/\$Master = "\$Master\/..\/..\/..";/' "$pkgdir/usr/share/texmf-dist/scripts/texlive/tlmgr.pl"
 
     # link programs from /usr/share/texmf-dist/scripts
     _linked_scripts="
