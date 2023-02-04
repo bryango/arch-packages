@@ -5,6 +5,7 @@ pkgbase=nautilus
 pkgname=(nautilus libnautilus-extension libnautilus-extension-docs)
 pkgver=43.2
 pkgrel=1
+epoch=1
 pkgdesc="Default file manager for GNOME"
 url="https://wiki.gnome.org/Apps/Files"
 arch=(x86_64)
@@ -14,14 +15,8 @@ depends=(libgexiv2 gdk-pixbuf2 gst-plugins-base-libs gnome-desktop-4 gvfs dconf
          libcloudproviders)
 makedepends=(gobject-introspection git gi-docgen meson appstream-glib)
 checkdepends=(python-gobject)
-_commit=506477f48a0a5a87a13d64d617b6d4b51106702b  # tags/43.2^0
-source=("git+https://gitlab.gnome.org/GNOME/nautilus.git#commit=$_commit")
+source=("nautilus::git+ssh://git@github.com/bryango/nautilus-typeahead.git#branch=$pkgver")
 sha256sums=('SKIP')
-
-pkgver() {
-  cd nautilus
-  git describe --tags | sed 's/[^-]*-g/r&/;s/-/+/g'
-}
 
 prepare() {
   cd nautilus
